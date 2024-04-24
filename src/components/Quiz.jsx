@@ -6,16 +6,30 @@ export default function Quiz() {
 
   const activeQuestionIndex = userAnswers.length;
 
+  function handleSelectAnswer(selectedAnswer) {
+    console.log(selectedAnswer);
+    setUserAnswers((prevUserAnswers) => {
+      return [...prevUserAnswers, selectedAnswer];
+    });
+    console.log(userAnswers);
+  }
+
   return (
-    <div id="question">
-      <p>{QUESTION[activeQuestionIndex].text}</p>
-      <ul id="answers">
-        {QUESTION[activeQuestionIndex].answers.map((answer) => (
-          <li key={answer} className="answer">
-            <button>{answer}</button>
-          </li>
-        ))}
-      </ul>
+    <div id="quiz">
+      <div id="question">
+        <p>{QUESTION[activeQuestionIndex].text}</p>
+        <ul id="answers">
+          {QUESTION[activeQuestionIndex].answers.map((answer) => (
+            <li
+              key={answer}
+              className="answer"
+              onClick={() => handleSelectAnswer(answer)}
+            >
+              <button>{answer}</button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
